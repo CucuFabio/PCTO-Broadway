@@ -36,7 +36,9 @@ return array.sort((a,b) => Math.random() - 0.5);
 function getMultipleChoices(n, correctAnswer, array) {
     // Use a while loop and the getRandomElement() function
     // Make sure there are no duplicates in the array
-    const choices = [correctAnswer];
+    const choices = []; // Dichiaro la variabile const choices come array vuoto
+
+    choices.push(correctAnswer);
     
     while (choices.length < n) {
         const randomChoice = getRandomElement(array);
@@ -56,13 +58,22 @@ function getBreedFromURL(url) {
     // Try to use destructuring as much as you can
     const urlSplit = url.split('/');
 
-    for (let i = 0; i < urlSplit.length; i++)
-    {
-      if (urlSplit[i] == "breeds")
-      {
-        return urlSplit[i + 1];
+    const dogBreed = (urlSplit.indexOf("breeds") + 1).toLowerCase;  // Da Migliorare, troppo limitato ad un solo tipo di url
+
+    BREEDS.find(breed => {
+      const normalizedBreed = breed.replace(/\s+/g, '').toLowerCase();
+      if (normalizedBreed === dogBreed) {
+        return dogBreed;
       }
-    }
+            
+      const breedWords = breed.toLowerCase().split(' ');
+                    
+      if (breedWords.includes(e => dogBreed.includes(e))) {
+        return dogBreed;
+      }
+  });
+
+  return null;
 }
 
 // TODO 3
