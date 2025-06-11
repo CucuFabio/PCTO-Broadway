@@ -36,7 +36,7 @@ function shuffleArray(array) {
 function getMultipleChoices(n, correctAnswer, array) {
   // Use a while loop and the getRandomElement() function
   // Make sure there are no duplicates in the array
-  const choices = []; // Dichiaro la variabile const choices come array vuoto
+  const choices = [];
 
   choices.push(correctAnswer);
 
@@ -55,25 +55,25 @@ function getMultipleChoices(n, correctAnswer, array) {
 // return the breed name string as formatted in the breed list, e.g. "standard poodle"
 function getBreedFromURL(url) {
   const urlParts = url.split('/');
-  const breedPath = urlParts[urlParts.indexOf("breeds") + 1];
+  const breedPath = urlParts[urlParts.indexOf("breeds") + 1].toLowerCase();
 
   const breedMatch = BREEDS.find(breed => {
-    const normalizedBreed = breed.replace(/\s+/g, '').toLowerCase();
-    return normalizedBreed === breedPath.toLowerCase();
+    const breedWithoutSpaces = breed.replace(/\s+/g, '').toLowerCase();
+    return breedWithoutSpaces === breedPath;
   });
 
   if (breedMatch) {
     return breedMatch;
   }
 
-  const breedPartialMatch = BREEDS.find(breed => {
+  const breedSecondMatch = BREEDS.find(breed => {
     const breedWords = breed.toLowerCase().split(' ');
-    const breedPathLower = breedPath.toLowerCase();
+    const breedPathLower = breedPath;
 
     return breedWords.every(word => breedPathLower.includes(word));
   });
 
-  return breedPartialMatch;
+  return breedSecondMatch;
 }
 
 // TODO 3
