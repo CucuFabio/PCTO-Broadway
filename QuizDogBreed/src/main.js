@@ -58,10 +58,10 @@ function getBreedFromURL(url) {
   // Try to use destructuring as much as you can
   const urlSplit = url.split('/');
 
-  const dogBreed = (urlSplit.indexOf("breeds") + 1).toLowerCase;  // Da Migliorare, troppo limitato ad un solo tipo di url
+  const dogBreed = (urlSplit.indexOf("breeds") + 1).toLowerCase();  // Da Migliorare, troppo limitato ad un solo tipo di url
 
   BREEDS.find(breed => {
-    const normalizedBreed = breed.replace(/\s+/g, '').toLowerCase();
+    const normalizedBreed = breed.replace(/\s+/g, ' ').toLowerCase();
     if (normalizedBreed === dogBreed) {
       return dogBreed;
     }
@@ -86,7 +86,8 @@ async function fetchMessage(url) {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-    const responseJSON = JSON.parse(response);
+    //const responseJSON = JSON.parse(response);
+    const responseJSON = await response.json();
     return responseJSON.message;
   } catch (error) {
     console.error(error.message);
@@ -154,6 +155,9 @@ async function loadQuizData() {
 // Asynchronously call the loadQuizData() function,
 // Then call renderQuiz() with the returned imageUrl, correctAnswer, and choices
 async function startQuiz() {
+  const quizData = loadQuizData();
+
+  renderQuiz(quizData[0], quizData[1], quizData[2]);
 }
 
 document.addEventListener('DOMContentLoaded', startQuiz);
