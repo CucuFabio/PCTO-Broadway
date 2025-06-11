@@ -68,9 +68,8 @@ function getBreedFromURL(url) {
 
   const breedSecondMatch = BREEDS.find(breed => {
     const breedWords = breed.toLowerCase().split(' ');
-    const breedPathLower = breedPath;
 
-    return breedWords.every(word => breedPathLower.includes(word));
+    return breedWords.every(word => breedPath.includes(word));
   });
 
   return breedSecondMatch;
@@ -83,9 +82,6 @@ function getBreedFromURL(url) {
 async function fetchMessage(url) {
   try {
     const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
     //const responseJSON = JSON.parse(response);
     const responseJSON = await response.json();
     return responseJSON.message;
