@@ -56,23 +56,23 @@ function getMultipleChoices(n, correctAnswer, array) {
 function getBreedFromURL(url) {
   const urlParts = url.split('/');
   const breedPath = urlParts[urlParts.indexOf("breeds") + 1];
-  
+
   const breedMatch = BREEDS.find(breed => {
     const normalizedBreed = breed.replace(/\s+/g, '').toLowerCase();
     return normalizedBreed === breedPath.toLowerCase();
   });
-  
+
   if (breedMatch) {
     return breedMatch;
   }
-  
+
   const breedPartialMatch = BREEDS.find(breed => {
     const breedWords = breed.toLowerCase().split(' ');
     const breedPathLower = breedPath.toLowerCase();
-    
+
     return breedWords.every(word => breedPathLower.includes(word));
   });
-  
+
   return breedPartialMatch;
 }
 
@@ -155,9 +155,8 @@ async function loadQuizData() {
 // Asynchronously call the loadQuizData() function,
 // Then call renderQuiz() with the returned imageUrl, correctAnswer, and choices
 async function startQuiz() {
-  const quizData = loadQuizData();
-
-  renderQuiz(quizData[0], quizData[1], quizData[2]);
+  const [doggoImgUrl, correctBreed, breedChoices] = await loadQuizData();
+  renderQuiz(doggoImgUrl, correctBreed, breedChoices);
 }
 
 document.addEventListener('DOMContentLoaded', startQuiz);
