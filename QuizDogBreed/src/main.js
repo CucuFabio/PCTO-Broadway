@@ -50,30 +50,30 @@ function getMultipleChoices(n, correctAnswer, array) {
   return shuffleArray(choices);
 }
 
-// TODO 2
+// TODO 2 - FIXED
 // Given a URL such as "https://images.dog.ceo/breeds/poodlestandard/n02113799_2280.jpg"
 // return the breed name string as formatted in the breed list, e.g. "standard poodle"
 function getBreedFromURL(url) {
-  // The string method .split(char) may come in handy
-  // Try to use destructuring as much as you can
-  const urlSplit = url.split('/');
-
-  const dogBreed = (urlSplit.indexOf("breeds") + 1).toLowerCase();  // Da Migliorare, troppo limitato ad un solo tipo di url
-
-  BREEDS.find(breed => {
-    const normalizedBreed = breed.replace(/\s+/g, ' ').toLowerCase();
-    if (normalizedBreed === dogBreed) {
-      return dogBreed;
-    }
-
-    const breedWords = breed.toLowerCase().split(' ');
-
-    if (breedWords.includes(e => dogBreed.includes(e))) {
-      return dogBreed;
-    }
+  const urlParts = url.split('/');
+  const breedPath = urlParts[urlParts.indexOf("breeds") + 1];
+  
+  const breedMatch = BREEDS.find(breed => {
+    const normalizedBreed = breed.replace(/\s+/g, '').toLowerCase();
+    return normalizedBreed === breedPath.toLowerCase();
   });
-
-  return null;
+  
+  if (breedMatch) {
+    return breedMatch;
+  }
+  
+  const breedPartialMatch = BREEDS.find(breed => {
+    const breedWords = breed.toLowerCase().split(' ');
+    const breedPathLower = breedPath.toLowerCase();
+    
+    return breedWords.every(word => breedPathLower.includes(word));
+  });
+  
+  return breedPartialMatch;
 }
 
 // TODO 3
