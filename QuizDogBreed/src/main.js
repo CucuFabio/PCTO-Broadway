@@ -81,6 +81,16 @@ function getBreedFromURL(url) {
 // then parse the response as a JSON object,
 // finally return the "message" property of its body
 async function fetchMessage(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const responseJSON = JSON.parse(response);
+    return responseJSON.message;
+  } catch (error) {
+    console.error(error.message);
+  }
 
 }
 
