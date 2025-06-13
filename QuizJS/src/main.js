@@ -22,7 +22,7 @@ const fact = {
 console.log(fact);
 
 //TODO 3
-
+// could use statement.textContent
 statement.innerHTML = fact.dichiarazione;
 
 // TODO 4
