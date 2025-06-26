@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Human Resources API Website</h1>
+            <p>Employee Management System</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="fetchReal" onclick="fetch()">
+                Load Data
+            </button>
+            <button class="btn" id="refresh" onclick="refreshData()">
+                Refresh
+            </button>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading employee data...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="stats" class="stats" style="display: none;"></div>
+
+        <div id="tableContainer" class="table-container" style="display: none;">
+            <div class="table-header">
+                <h2>Employee Directory</h2>
+                <p>Comprehensive employee information</p>
+            </div>
+            <table id="employeeTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>National ID</th>
+                        <th>Login ID</th>
+                        <th>Job Title</th>
+                        <th>Gender</th>
+                        <th>Status</th>
+                        <th>Hire Date</th>
+                        <th>Vacation</th>
+                        <th>Sick Leave</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="src/main.js"></script>
+</body>
+</html>
